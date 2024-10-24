@@ -31,3 +31,20 @@ Select * from projects where start_date >= date_sub(curdate(), interval 5 month)
 Select p.project_id, p.project_name, e.employee_id, e.first_name
 from employees e join employeeprojects ep on e.employee_id = ep.employee_id right join projects p on ep.project_id = p.project_id;
 
+-- Update Query with a condition
+Update employees e join departments d on e.department_id = d.department_id 
+set e.salary = e.salary*1.12 where d.department_name='Finance';
+
+-- String Funtions
+Select first_name, last_name from employees where last_name like 'J%';
+
+-- Aggrigate with count
+Select department_id, count(*) as employee_count from employees group by department_id;
+Select d.department_name, count(e.employee_id) as employee_count from employees e 
+join departments d on e.department_id=d.department_id group by d.department_name;
+
+-- join and aggrigation
+Select p.project_name, sum(ep.hours_worked) as total_hours from employeeprojects ep
+join projects p on ep.project_id=p.project_id group by p.project_name;
+
+
